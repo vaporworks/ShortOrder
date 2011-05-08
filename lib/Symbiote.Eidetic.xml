@@ -1,0 +1,299 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Symbiote.Eidetic</name>
+    </assembly>
+    <members>
+        <member name="M:Symbiote.Eidetic.IRemember.Get(System.String)">
+            <summary>
+            Retrieves the specified item from the cache.
+            </summary>
+            <param name="key">The identifier for the item to retrieve.</param>
+            <returns>The retrieved item, or <value>null</value> if the key was not found.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Get``1(System.String)">
+            <summary>
+            Retrieves the specified item from the cache.
+            </summary>
+            <param name="key">The identifier for the item to retrieve.</param>
+            <returns>The retrieved item, or <value>default(T)</value> if the key was not found.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.TryGet(System.String,System.Object@)">
+            <summary>
+            Tries to get an item from the cache.
+            </summary>
+            <param name="key">The identifier for the item to retrieve.</param>
+            <param name="value">The retrieved item or null if not found.</param>
+            <returns>The <value>true</value> if the item was successfully retrieved.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Store(Symbiote.Eidetic.StoreMode,System.String,System.Object)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <remarks>The item does not expire unless it is removed due memory pressure.</remarks>
+            <returns>true if the item was successfully stored in the cache; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Store(Symbiote.Eidetic.StoreMode,System.String,System.Object,System.TimeSpan)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <param name="validFor">The interval after the item is invalidated in the cache.</param>
+            <returns>true if the item was successfully stored in the cache; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Store(Symbiote.Eidetic.StoreMode,System.String,System.Object,System.DateTime)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <param name="expiresAt">The time when the item is invalidated in the cache.</param>
+            <returns>true if the item was successfully stored in the cache; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.CheckAndSet(Symbiote.Eidetic.StoreMode,System.String,System.Object)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location and returns its version.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <remarks>The item does not expire unless it is removed due memory pressure. The text protocol does not support this operation, you need to Store then GetWithCas.</remarks>
+            <returns>A CasResult object containing the version of the item and the result of the operation (true if the item was successfully stored in the cache; false otherwise).</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.CheckAndSet(Symbiote.Eidetic.StoreMode,System.String,System.Object,System.UInt64)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location and returns its version.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <remarks>The item does not expire unless it is removed due memory pressure.</remarks>
+            <returns>A CasResult object containing the version of the item and the result of the operation (true if the item was successfully stored in the cache; false otherwise).</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.CheckAndSet(Symbiote.Eidetic.StoreMode,System.String,System.Object,System.TimeSpan,System.UInt64)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location and returns its version.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <param name="validFor">The interval after the item is invalidated in the cache.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>A CasResult object containing the version of the item and the result of the operation (true if the item was successfully stored in the cache; false otherwise).</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.CheckAndSet(Symbiote.Eidetic.StoreMode,System.String,System.Object,System.DateTime,System.UInt64)">
+            <summary>
+            Inserts an item into the cache with a cache key to reference its location and returns its version.
+            </summary>
+            <param name="mode">Defines how the item is stored in the cache.</param>
+            <param name="key">The key used to reference the item.</param>
+            <param name="value">The object to be inserted into the cache.</param>
+            <param name="expiresAt">The time when the item is invalidated in the cache.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>A CasResult object containing the version of the item and the result of the operation (true if the item was successfully stored in the cache; false otherwise).</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Increment(System.String,System.UInt64,System.UInt64)">
+            <summary>
+            Increments the value of the specified key by the given amount. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to increase the item.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Increment(System.String,System.UInt64,System.UInt64,System.TimeSpan)">
+            <summary>
+            Increments the value of the specified key by the given amount. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to increase the item.</param>
+            <param name="validFor">The interval after the item is invalidated in the cache.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Increment(System.String,System.UInt64,System.UInt64,System.DateTime)">
+            <summary>
+            Increments the value of the specified key by the given amount. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to increase the item.</param>
+            <param name="expiresAt">The time when the item is invalidated in the cache.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Increment(System.String,System.UInt64,System.UInt64,System.UInt64)">
+            <summary>
+            Increments the value of the specified key by the given amount, but only if the item's version matches the CAS value provided. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to increase the item.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Increment(System.String,System.UInt64,System.UInt64,System.TimeSpan,System.UInt64)">
+            <summary>
+            Increments the value of the specified key by the given amount, but only if the item's version matches the CAS value provided. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to increase the item.</param>
+            <param name="validFor">The interval after the item is invalidated in the cache.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Increment(System.String,System.UInt64,System.UInt64,System.DateTime,System.UInt64)">
+            <summary>
+            Increments the value of the specified key by the given amount, but only if the item's version matches the CAS value provided. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to increase the item.</param>
+            <param name="expiresAt">The time when the item is invalidated in the cache.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Decrement(System.String,System.UInt64,System.UInt64)">
+            <summary>
+            Decrements the value of the specified key by the given amount. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to decrease the item.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Decrement(System.String,System.UInt64,System.UInt64,System.TimeSpan)">
+            <summary>
+            Decrements the value of the specified key by the given amount. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to decrease the item.</param>
+            <param name="validFor">The interval after the item is invalidated in the cache.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Decrement(System.String,System.UInt64,System.UInt64,System.DateTime)">
+            <summary>
+            Decrements the value of the specified key by the given amount. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to decrease the item.</param>
+            <param name="expiresAt">The time when the item is invalidated in the cache.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Decrement(System.String,System.UInt64,System.UInt64,System.UInt64)">
+            <summary>
+            Decrements the value of the specified key by the given amount, but only if the item's version matches the CAS value provided. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to decrease the item.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Decrement(System.String,System.UInt64,System.UInt64,System.TimeSpan,System.UInt64)">
+            <summary>
+            Decrements the value of the specified key by the given amount, but only if the item's version matches the CAS value provided. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to decrease the item.</param>
+            <param name="validFor">The interval after the item is invalidated in the cache.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Decrement(System.String,System.UInt64,System.UInt64,System.DateTime,System.UInt64)">
+            <summary>
+            Decrements the value of the specified key by the given amount, but only if the item's version matches the CAS value provided. The operation is atomic and happens on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="defaultValue">The value which will be stored by the server if the specified item was not found.</param>
+            <param name="delta">The amount by which the client wants to decrease the item.</param>
+            <param name="expiresAt">The time when the item is invalidated in the cache.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <returns>The new value of the item or defaultValue if the key was not found.</returns>
+            <remarks>If the client uses the Text protocol, the item must be inserted into the cache before it can be changed. It must be inserted as a <see cref="T:System.String"/>. Moreover the Text protocol only works with <see cref="T:System.UInt32"/> values, so return value -1 always indicates that the item was not found.</remarks>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Append(System.String,System.ArraySegment{System.Byte})">
+            <summary>
+            Appends the data to the end of the specified item's data on the server.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="data">The data to be appended to the item.</param>
+            <returns>true if the data was successfully stored; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Prepend(System.String,System.ArraySegment{System.Byte})">
+            <summary>
+            Inserts the data before the specified item's data on the server.
+            </summary>
+            <returns>true if the data was successfully stored; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Append(System.String,System.UInt64,System.ArraySegment{System.Byte})">
+            <summary>
+            Appends the data to the end of the specified item's data on the server, but only if the item's version matches the CAS value provided.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <param name="data">The data to be prepended to the item.</param>
+            <returns>true if the data was successfully stored; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Prepend(System.String,System.UInt64,System.ArraySegment{System.Byte})">
+            <summary>
+            Inserts the data before the specified item's data on the server, but only if the item's version matches the CAS value provided.
+            </summary>
+            <param name="key">The key used to reference the item.</param>
+            <param name="cas">The cas value which must match the item's version.</param>
+            <param name="data">The data to be prepended to the item.</param>
+            <returns>true if the data was successfully stored; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.FlushAll">
+            <summary>
+            Removes all data from the cache. Note: this will invalidate all data on all servers in the pool.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Stats">
+            <summary>
+            Returns statistics about the servers.
+            </summary>
+            <returns></returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Remove(System.String)">
+            <summary>
+            Removes the specified item from the cache.
+            </summary>
+            <param name="key">The identifier for the item to delete.</param>
+            <returns>true if the item was successfully removed from the cache; false otherwise.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Get(System.Collections.Generic.IEnumerable{System.String})">
+            <summary>
+            Retrieves multiple items from the cache.
+            </summary>
+            <param name="keys">The list of identifiers for the items to retrieve.</param>
+            <returns>a Dictionary holding all items indexed by their key.</returns>
+        </member>
+        <member name="M:Symbiote.Eidetic.IRemember.Dispose">
+            <summary>
+            Releases all resources allocated by this instance
+            </summary>
+            <remarks>You should only call this when you are not using static instances of the client, so it can close all conections and release the sockets.</remarks>
+        </member>
+    </members>
+</doc>
