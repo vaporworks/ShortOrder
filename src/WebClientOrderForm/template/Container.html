@@ -1,0 +1,39 @@
+<div class="container">
+    <fieldset class="container">
+        <legend>
+            <img src="./img/diner.jpg" alt="chef cartoon" />
+        </legend>
+        <div>
+            <div class="order-tab">
+                <div class="menu-title">Menu</div>
+                <div class="menu-scrollarea">
+                    <ul class="menu-list" data-bind="template: { name: 'MenuItem', foreach: menu }" />
+                </div>
+            </div>
+            <div class="order-form" data-bind="template: {name: 'OrderForm', data: orderToPlace}">
+        </div>
+    </fieldset>
+    <div class="order-controls">
+        <input type="button" value="Clear Order" data-bind="click: viewModel.clearOrder">
+        <input type="button" value="Submit Order" data-bind="click: viewModel.placeOrder">
+    </div>
+    <div class="validation-messages" data-bind="template: {name: 'Validation', foreach: validationMessages }" />
+    <div class="submitted-orders">
+        <table class="submitted-orders" cellspacing="0">
+            {{each(o, order) orders}}
+            <tr>
+                <td data-bind="css: { 'submitted-order-items-cell-alt': o % 2 !== 0, 'submitted-order-items-cell': o % 2 === 0}"><span class="submitted-label">Order&nbsp;#:&nbsp;</span><span data-bind="text: orderNumber" /></td>
+                <td data-bind="css: { 'submitted-order-items-cell-alt': o % 2 !== 0, 'submitted-order-items-cell': o % 2 === 0}"><span class="submitted-label">Customer:&nbsp;</span><span data-bind="text: customerName" /></td>
+                <td data-bind="css: { 'submitted-order-items-cell-alt': o % 2 !== 0, 'submitted-order-items-cell': o % 2 === 0}">
+                    <ul class="submitted-order-items">
+                        {{each(i, item) menuItems}}
+                        <li class="submitted-order-item">${ item.description } x ${ item.qty } </li>
+                        {{/each}}
+                    </ul>
+                </td>
+                <td data-bind="css: { 'submitted-order-items-cell-alt': o % 2 !== 0, 'submitted-order-items-cell': o % 2 === 0}"><span class="submitted-label">Status:&nbsp;</span>${ order.status }</td>
+            </tr>
+            {{/each}}
+        </table>
+    </div>
+</div>
