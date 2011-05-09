@@ -43,6 +43,9 @@
     <Reference Include="RabbitMQ.Client">
       <HintPath>..\..\lib\RabbitMQ.Client.dll</HintPath>
     </Reference>
+    <Reference Include="Relax">
+      <HintPath>..\..\lib\Relax.dll</HintPath>
+    </Reference>
     <Reference Include="Symbiote.Core">
       <HintPath>..\..\lib\Symbiote.Core.dll</HintPath>
     </Reference>
@@ -73,13 +76,22 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DomainService.cs" />
+    <Compile Include="handlers\v1\HandeMenuItemAdd.cs" />
+    <Compile Include="handlers\v1\HandleCreateOrder.cs" />
+    <Compile Include="handlers\v1\HandleMenuItemUpdate.cs" />
+    <Compile Include="handlers\v1\WhenMenuItemAdded.cs" />
+    <Compile Include="handlers\v1\WhenMenuItemChanged.cs" />
+    <Compile Include="handlers\v1\WhenOrderCreated.cs" />
+    <Compile Include="support\CouchActorStore.cs" />
+    <Compile Include="support\OrderFactory.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Initiailizer.cs" />
-    <Compile Include="MenuItemFactory.cs" />
-    <Compile Include="MenuItemKeyAccessor.cs" />
-    <Compile Include="MenuItemMemento.cs" />
-    <Compile Include="OrderKeyAccessor.cs" />
-    <Compile Include="OrderMemento.cs" />
+    <Compile Include="support\MenuItemFactory.cs" />
+    <Compile Include="support\MenuItemKeyAccessor.cs" />
+    <Compile Include="support\MenuItemMemento.cs" />
+    <Compile Include="support\OrderKeyAccessor.cs" />
+    <Compile Include="support\OrderMemento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

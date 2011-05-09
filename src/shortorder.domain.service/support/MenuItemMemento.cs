@@ -1,9 +1,12 @@
-﻿using shortoder.domain;
+﻿using Relax;
+using shortoder.domain;
 using Symbiote.Core;
 
 namespace shortorder.domain.service
 {
-    public class MenuItemMemento : IMemento<MenuItem>
+    public class MenuItemMemento : 
+        CouchDocument,
+        IMemento<MenuItem>
     {
         public int Id { get; set; }
         public string Name { get; set; }
