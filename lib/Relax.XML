@@ -1,10 +1,10 @@
 <?xml version="1.0"?>
 <doc>
     <assembly>
-        <name>Symbiote.Couch</name>
+        <name>Relax</name>
     </assembly>
     <members>
-        <member name="T:Symbiote.Couch.Impl.CouchProxy">
+        <member name="T:Relax.Impl.CouchProxy">
             <summary>
             This class provides generic abstractions that Symbiote's
             Actor system requires in order to handle caching and

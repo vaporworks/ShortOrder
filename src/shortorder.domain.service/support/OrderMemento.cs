@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Relax;
 using shortoder.domain;
 using Symbiote.Core;
 
 namespace shortorder.domain.service
 {
-    public class OrderMemento : IMemento<Order>
+    public class OrderMemento : 
+        CouchDocument,
+        IMemento<Order>
     {
         public Guid Id { get; set; }
         public int Rank { get; set; }
