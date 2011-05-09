@@ -41,9 +41,20 @@ amplify.request.define("getOrderStatus", function( settings ) {
     settings.success(testData);
 });
 
+/*amplify.request.define("getNewOrderId", "ajax", {
+    url: "/uniqueid",
+    dataType: "json",
+    type: "GET",
+    contentType : "application/json"
+});*/
+
+amplify.request.define("getNewOrderId", function( settings ) {
+    settings.success(Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000));
+});
+
 var repository = {
-    getUniqueId: function() {
-        return Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000);
+    getUniqueId: function(observable) {
+        amplify.request("getNewOrderId", function(data) { observable(data); });
     },
     
     getMenuList: function(callback) {
@@ -87,10 +98,19 @@ var OrderedItem = function(options) {
 
 var Order = function(options) {
     var opt = options || {};
-    this.orderNumber = new ko.observable(opt.orderNumber || repository.getUniqueId());
+
+    this.orderNumber = new ko.observable(opt.orderNumber);
+
+    this.acquireNewOrderNumber = function() {
+        repository.getUniqueId(this.orderNumber);
+    };
+
     this.customerName = new ko.observable(opt.customerName || "");
+
     this.menuItems = new ko.observableArray(opt.menuItems || []);
+
     this.status = new ko.observable(opt.status || "Pending");
+
     this.addOrderedItem = function(menuItem) {
         var i = 0;
         for(i; i < this.menuItems().length;i++) {
@@ -130,6 +150,8 @@ var Order = function(options) {
             }
         }
     }
+
+    this.acquireNewOrderNumber();
 };
 
 window.ViewModel = function() {
@@ -164,6 +186,7 @@ window.ViewModel = function() {
             this.orders.push(newOrder);
             repository.submitOrder(newOrder);
             this.clearOrder();
+            this.orderToPlace.acquireNewOrderNumber();
         }
     };
 
