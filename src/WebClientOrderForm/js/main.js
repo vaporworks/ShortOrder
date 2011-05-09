@@ -1,67 +1,67 @@
-/*amplify.request.define( "submitOrder", "ajax", {
-    url: "/order/{orderNumber}",
-    dataType: "json",
-    type: "PUT",
-    contentType : "application/json"
-});*/
-amplify.request.define( "submitOrder", function( settings ) {
-    settings.success("Order Received");
-});
+var Repository = function() {
+    /*amplify.request.define( "submitOrder", "ajax", {
+        url: "/order/{orderNumber}",
+        dataType: "json",
+        type: "PUT",
+        contentType : "application/json"
+    });*/
+    amplify.request.define( "submitOrder", function( settings ) {
+        settings.success("Order Received");
+    });
 
-/*amplify.request.define("getMenuItems", "ajax", {
-    url: "/menu",
-    dataType: "json",
-    type: "GET",
-    contentType : "application/json"
-});*/
-amplify.request.define( "getMenuItems", function( settings ) {
-	settings.success([
-		new MenuItem({itemId:1, description: "Burger", imageSource: "./img/burger.png"}),
-        new MenuItem({itemId:2, description: "Fries", imageSource: "./img/fries.png"}),
-        new MenuItem({itemId:3, description: "Drink", imageSource: "./img/drink.png"}),
-        new MenuItem({itemId:4, description: "Shake", imageSource: "./img/shake.png"})
-	]);
-});
+    /*amplify.request.define("getMenuItems", "ajax", {
+        url: "/menu",
+        dataType: "json",
+        type: "GET",
+        contentType : "application/json"
+    });*/
+    amplify.request.define( "getMenuItems", function( settings ) {
+        settings.success([
+            new MenuItem({itemId:1, description: "Burger", imageSource: "./img/burger.png"}),
+            new MenuItem({itemId:2, description: "Fries", imageSource: "./img/fries.png"}),
+            new MenuItem({itemId:3, description: "Drink", imageSource: "./img/drink.png"}),
+            new MenuItem({itemId:4, description: "Shake", imageSource: "./img/shake.png"})
+        ]);
+    });
 
-/*amplify.request.define("getOrderStatus", "ajax", {
-    url: "/orderStatus",
-    dataType: "json",
-    type: "POST",
-    contentType : "application/json"
-});*/
-amplify.request.define("getOrderStatus", function( settings ) {
-    var testData = [];
-    var i = 0;
-    for(i; i < window.viewModel.orders().length; i++) {
-        testData.push({
-                        OrderNumber: window.viewModel.orders()[i].orderNumber(),
-                        Status: "It's in the Queue"
-                      });
-    }
-    settings.success(testData);
-});
+    /*amplify.request.define("getOrderStatus", "ajax", {
+        url: "/orderStatus",
+        dataType: "json",
+        type: "POST",
+        contentType : "application/json"
+    });*/
+    amplify.request.define("getOrderStatus", function( settings ) {
+        var testData = [];
+        var i = 0;
+        for(i; i < window.viewModel.orders().length; i++) {
+            testData.push({
+                            OrderNumber: window.viewModel.orders()[i].orderNumber(),
+                            Status: "It's in the Queue"
+                          });
+        }
+        settings.success(testData);
+    });
 
-/*amplify.request.define("getNewOrderId", "ajax", {
-    url: "/uniqueid",
-    dataType: "json",
-    type: "GET",
-    contentType : "application/json"
-});*/
+    /*amplify.request.define("getNewOrderId", "ajax", {
+        url: "/uniqueid",
+        dataType: "json",
+        type: "GET",
+        contentType : "application/json"
+    });*/
 
-amplify.request.define("getNewOrderId", function( settings ) {
-    settings.success(Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000));
-});
+    amplify.request.define("getNewOrderId", function( settings ) {
+        settings.success(Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000));
+    });
 
-var repository = {
-    getUniqueId: function(observable) {
+    this.getUniqueId = function(observable) {
         amplify.request("getNewOrderId", function(data) { observable(data); });
-    },
-    
-    getMenuList: function(callback) {
-        amplify.request("getMenuItems", callback);
-    },
+    };
 
-    submitOrder: function(order) {
+    this.getMenuList = function(callback) {
+        amplify.request("getMenuItems", callback);
+    };
+
+    this.submitOrder = function(order) {
         var createOrderCommand = {
                                     Id: order.orderNumber(),
                                     CustomerName: order.customerName(),
@@ -69,9 +69,9 @@ var repository = {
                                  };
         var data = { request: JSON.stringify(createOrderCommand) };
         amplify.request("submitOrder", data, function() { window.viewModel.updateOrderStatus(order.orderNumber(), "Order Received"); });
-    },
+    };
 
-    getOrderStatus: function(orderNumbers) {
+    this.getOrderStatus = function(orderNumbers) {
         var ords = { OrderNumbers: orderNumbers };
         var data = { request: JSON.stringify(ords) };
         amplify.request("getOrderStatus", data, function(data) {
@@ -80,8 +80,10 @@ var repository = {
                 window.viewModel.updateOrderStatus(data[x].OrderNumber, data[x].Status);
             }
         });
-    }
+    };
 };
+
+var repository = new Repository();
 
 var MenuItem = function(options) {
     var opt = options || {};
