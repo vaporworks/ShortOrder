@@ -77,13 +77,15 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="IdService.cs" />
+    <Compile Include="Applications\FileServer.cs" />
+    <Compile Include="Applications\IdService.cs" />
+    <Compile Include="HostService.cs" />
     <Compile Include="Initializer.cs" />
-    <Compile Include="MenuItemList.cs" />
-    <Compile Include="NewMenuItem.cs" />
-    <Compile Include="NewOrder.cs" />
-    <Compile Include="OrderList.cs" />
-    <Compile Include="OrderStatus.cs" />
+    <Compile Include="Applications\MenuItemList.cs" />
+    <Compile Include="Applications\NewMenuItem.cs" />
+    <Compile Include="Applications\NewOrder.cs" />
+    <Compile Include="Applications\OrderList.cs" />
+    <Compile Include="Applications\OrderStatus.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UpdateMenuItem.cs" />

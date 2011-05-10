@@ -1,9 +1,14 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using hyperstack;
+using hyperstack.Owin.Http;
+using hyperstack.Owin.Impl;
 using rocketsockets;
+using rocketsockets.Config;
 using Symbiote.Core;
 using Symbiote.Daemon;
 using Symbiote.Rabbit;
+using Symbiote.Log4Net;
 
 namespace shortorder.http
 {
@@ -15,12 +20,20 @@ namespace shortorder.http
                                 .Initialize()
                                 .RocketSockets( x => x.UseDefaultEndpoint() )
                                 .HyperStack( x => x
-                                                      .RegisterApplications( h =>
-                                                      {
-                                                    
-                                                      } )
-                                                      .ConfigureHost( c => c.BasePath( @"..\..\files" ))
+                                                      .ConfigureHost( c => c
+                                                          .BasePath( @"..\..\..\WebClientOrderForm" )
+                                                          .AddViewSearchFolder( "template" )
+                                                      )
                                                       .RegisterApplications( routes => routes
+                                                            .DefineApplication( request => request.RequestUri.EndsWith( "fav.ico" ), ( request, response, exception ) => 
+                                                            {
+                                                                response( HttpStatus.NoContent.ToString(), new Dictionary<string, string>(), ( bytes, error, continuation ) => () => { } ); 
+                                                            } )
+                                                            .DefineApplication<FileServer>( request =>
+                                                            {
+                                                                var last = request.PathSegments.LastOrDefault() ?? "";
+                                                                return last.Contains( "." );
+                                                            } )
                                                             .DefineApplication<IdService>( request => 
                                                                 "uniqueid".Equals( request.PathSegments.FirstOrDefault() ) 
                                                                 && request.Method.Equals( "GET" ) )
@@ -46,8 +59,11 @@ namespace shortorder.http
                                                                 "order".Equals( request.PathSegments.FirstOrDefault() )
                                                                 && request.PathSegments.Count == 2
                                                                 && request.Method.Equals( "GET" ) )
+                                                            .DefineApplication<FileServer>( request => 
+                                                                request.PathSegments.Count == 0 )
                                                         )
                                             )
+                                .AddConsoleLogger<HostService>( x => x.Debug().MessageLayout( m => m.Message().Newline() ) )
                                 .Rabbit( x => x.AddBroker( b => b.Defaults() ).EnrollAsMeshNode( true ) )
                                 .Daemon( x => x.Name( "shortstack.http" ) ) );
         }
