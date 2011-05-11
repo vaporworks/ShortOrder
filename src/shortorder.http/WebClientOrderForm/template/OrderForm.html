@@ -1,0 +1,20 @@
+<div class="order-title">Your Order</div>
+<div class="order-content">
+    <table>
+        <tr>
+            <td class="order-label">Your Name:</td>
+            <td class="order-value"><input type="text" data-bind="value: customerName" /></td>
+        </tr>
+        <tr>
+            <td class="order-label">Order Number:</td>
+            <td class="order-value"><span data-bind="text: orderNumber"></td>
+        </tr>
+        <tr>
+            <td class="order-label">Items:</td>
+            <td class="order-value">
+                <div class="order-menu-list" data-bind="template: {name: 'OrderedItem', foreach: menuItems()}" />
+                <div style="clear:both;" />
+            </td>
+        </tr>
+    </table>
+</div>

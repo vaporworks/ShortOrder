@@ -22,7 +22,7 @@ namespace shortorder.http
                 .RocketSockets( x => x.UseDefaultEndpoint() )
                 .HyperStack( x => x
                                         .ConfigureHost( c => c
-                                            .BasePath( @"..\..\..\WebClientOrderForm" )
+                                            .BasePath( @"C:\active-git\ShortOrder\src\shortorder.http\WebClientOrderForm" )
                                             .AddViewSearchFolder( "template" )
                                         )
                                         .RegisterApplications( routes => routes

@@ -9,6 +9,11 @@ namespace shortoder.domain
         public int Rank { get; set; }
         public string CustomerName { get; set; }
         public IList<OrderItem> ItemIds { get; set; }
+
+        public Order() 
+        {
+            ItemIds = new List<OrderItem>();
+        }
     }
 
     public class OrderItem

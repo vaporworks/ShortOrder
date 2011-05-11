@@ -25,7 +25,7 @@ namespace shortorder.domain.service.handlers.v1
                 {
                     order.Id = message.Id;
                     order.CustomerName = message.CustomerName;
-                    order.ItemIds = message.AddItems.Select( s => new OrderItem() {ItemId = s.ItemId, Qty = s.Qty} ).ToList();
+                    order.ItemIds = message.Items.Select( s => new OrderItem() {ItemId = s.ItemId, Qty = s.Qty} ).ToList();
 
                     Couch.Save( order.Id, MementoProvider.GetMemento( order ) );
 
@@ -35,7 +35,7 @@ namespace shortorder.domain.service.handlers.v1
                     {
                         x.ActorId = message.Id.ToString();
                         x.CustomerName = message.CustomerName;
-                        x.Items = message.AddItems.Select( s => new OrderItemCreated()
+                        x.Items = message.Items.Select( s => new OrderItemCreated()
                                                                     {
                                                                         ItemId = s.ItemId,
                                                                         Qty = s.Qty

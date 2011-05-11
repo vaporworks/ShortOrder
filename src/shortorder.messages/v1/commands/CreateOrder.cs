@@ -9,7 +9,7 @@ namespace shortorder.messages
     {
         public Guid Id { get; set; }
         public string CustomerName { get; set; }
-        public IList<AddOrderItem> AddItems { get; set; }
+        public List<AddOrderItem> Items { get; set; }
     }
 
     public class AddOrderItem

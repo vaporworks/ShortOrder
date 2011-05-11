@@ -1,0 +1,149 @@
+body {
+    font-family: Verdana, Arial, Tahoma
+}
+
+.container fieldset  {
+    border: 1pt solid black;
+    border-radius:15px;
+    min-height:450px;
+    max-width:900px;
+}
+
+.order-tab {
+    float: left;
+}
+
+.order-form {
+    padding-left: 160px;
+}
+
+.validation-messages {
+    padding-top:15px;
+    width:900px;
+    text-align:center;
+    font-size: 12pt;
+    color: maroon;
+}
+
+.menu-title {
+    line-height:35px;
+    font-size: 18pt;
+    width:150px;
+    text-align:center;
+    border-bottom:gray inset thin;
+    border-top:gray inset thin;
+}
+
+.order-title {
+    border-bottom:gray inset thin;
+    border-top:gray inset thin;
+    line-height:35px;
+    font-size: 18pt;
+    text-align:center;
+}
+
+.menu-list {
+    list-style-type:none;
+}
+
+.menu-scrollarea {
+    max-height:485px;
+    overflow-y:auto;
+}
+
+.menu-item {
+    padding-top:15px;
+}
+
+.order-label {
+    font-weight:bold;
+    font-size: 10pt;
+    vertical-align:top;
+    line-height:25px;
+}
+
+.order-value {
+    padding-left:15px;
+}
+
+.order-menu-list {
+    float:left;
+    overflow:auto;
+    max-height:425px;
+    max-width:435px;
+}
+
+.lightQty {
+    font-size: 32pt;
+    color: #dcdcdc;
+}
+
+.dimQty {
+    font-size: 32pt;
+    color: silver;
+}
+
+.darkQty {
+    font-size: 32pt;
+    color: #696969;
+}
+
+.darkestQty {
+    font-size: 32pt;
+    color: black;
+}
+
+.order-controls {
+    padding-top:15px;
+    width: 900px;
+    text-align:center;
+}
+
+.order-content {
+    max-height:485px;
+}
+
+.ordered-item {
+    padding-right:25px;
+    padding-top: 15px;
+    white-space:pre-line;
+}
+
+.submitted-order-items {
+    list-style-type:disc;
+    vertical-align:middle;
+    font-size: 7pt;
+}
+
+.submitted-order-items-cell {
+    border-bottom:.5pt solid silver;
+    border-top:.5pt solid silver;
+    vertical-align:middle;
+    background-color:#f5f5f5;
+    text-align:left;
+}
+
+.submitted-order-items-cell-alt {
+    border-bottom:.5pt solid silver;
+    border-top:.5pt solid silver;
+    vertical-align:middle;
+    background-color:white;
+    text-align:left;
+}
+
+table.submitted-orders {
+    vertical-align:top;
+    width:900px;
+    margin-left:20px;
+}
+
+.submitted-orders  {
+    overflow-y:auto;
+    max-height:250px;
+    max-width:950px;
+    font-size:8pt;
+}
+
+.submitted-label {
+    font-weight:bold;
+}

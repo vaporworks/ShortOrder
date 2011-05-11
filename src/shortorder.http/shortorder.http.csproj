@@ -92,12 +92,92 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="app.config" />
+    <None Include="WebClientOrderForm\.idea\.name" />
+    <None Include="WebClientOrderForm\.idea\WebClientOrderForm.iml" />
+    <None Include="WebClientOrderForm\build\build-third-party.bat" />
+    <None Include="WebClientOrderForm\build\build-windows.bat" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\shortorder.messages\shortorder.messages.csproj">
       <Project>{E80E02FA-78E5-48A1-8DC1-E10ACAF39770}</Project>
       <Name>shortorder.messages</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="WebClientOrderForm\.idea\encodings.xml" />
+    <Content Include="WebClientOrderForm\.idea\misc.xml" />
+    <Content Include="WebClientOrderForm\.idea\modules.xml" />
+    <Content Include="WebClientOrderForm\.idea\vcs.xml" />
+    <Content Include="WebClientOrderForm\.idea\workspace.xml" />
+    <Content Include="WebClientOrderForm\build\output\ShortOrder.debug.js" />
+    <Content Include="WebClientOrderForm\build\output\ShortOrder.js" />
+    <Content Include="WebClientOrderForm\build\output\ThirdParty.js" />
+    <Content Include="WebClientOrderForm\build\source-references.js" />
+    <Content Include="WebClientOrderForm\build\third-party-libs.js" />
+    <Content Include="WebClientOrderForm\build\tools\curl.exe" />
+    <Content Include="WebClientOrderForm\build\version-header.js" />
+    <Content Include="WebClientOrderForm\css\style.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\img\burger.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\img\chef.bmp">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\img\diner.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\img\drink.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\img\fries.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\img\shake.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\Index.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\js-src\CreateNameSpace.js" />
+    <Content Include="WebClientOrderForm\js-src\MenuItem.js" />
+    <Content Include="WebClientOrderForm\js-src\Order.js" />
+    <Content Include="WebClientOrderForm\js-src\OrderedItem.js" />
+    <Content Include="WebClientOrderForm\js-src\Repository.js" />
+    <Content Include="WebClientOrderForm\js-src\WindowViewModel.js" />
+    <Content Include="WebClientOrderForm\js\ShortOrder.debug.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\js\ShortOrder.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\js\ThirdParty.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\lib\amplify.core.js" />
+    <Content Include="WebClientOrderForm\lib\amplify.request.js" />
+    <Content Include="WebClientOrderForm\lib\jquery-1.5.2.js" />
+    <Content Include="WebClientOrderForm\lib\jquery.tmpl.js" />
+    <Content Include="WebClientOrderForm\lib\json2.js" />
+    <Content Include="WebClientOrderForm\lib\knockout-latest.debug.js" />
+    <Content Include="WebClientOrderForm\lib\knockout-latest.js" />
+    <Content Include="WebClientOrderForm\lib\koExternalTemplateEngine.js" />
+    <Content Include="WebClientOrderForm\template\Container.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\template\MenuItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\template\OrderedItem.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\template\OrderForm.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="WebClientOrderForm\template\Validation.html">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
