@@ -10,12 +10,12 @@
                     <ul class="menu-list" data-bind="template: { name: 'MenuItem', foreach: menu }" />
                 </div>
             </div>
-            <div class="order-form" data-bind="template: {name: 'OrderForm', data: orderToPlace}">
+            <div class="order-form" data-bind="template: {name: 'OrderForm', data: so.viewModel.orderToPlace}">
         </div>
     </fieldset>
     <div class="order-controls">
-        <input type="button" value="Clear Order" data-bind="click: viewModel.clearOrder">
-        <input type="button" value="Submit Order" data-bind="click: viewModel.placeOrder">
+        <input type="button" value="Clear Order" data-bind="click: clearOrder">
+        <input type="button" value="Submit Order" data-bind="click: placeOrder">
     </div>
     <div class="validation-messages" data-bind="template: {name: 'Validation', foreach: validationMessages }" />
     <div class="submitted-orders">

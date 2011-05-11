@@ -1,4 +1,4 @@
-<span class="ordered-item" data-bind="click: function() { viewModel.orderToPlace.removeOrderedItem(this.itemId);}">
+<span class="ordered-item" data-bind="click: function() { this.orderToPlace.removeOrderedItem(this.itemId);}">
     <img data-bind="attr: {src: imageSource}" width="50" />
     <span data-bind="attr: {class: qtyClass}">&nbsp;x${ qty }</span>
 </span>
