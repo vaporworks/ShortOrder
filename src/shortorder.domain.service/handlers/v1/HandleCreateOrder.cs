@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Linq;
 using Relax;
 using shortoder.domain;
 using shortorder.messages;
@@ -24,7 +25,7 @@ namespace shortorder.domain.service.handlers.v1
                 {
                     order.Id = message.Id;
                     order.CustomerName = message.CustomerName;
-                    order.ItemIds = message.ItemIds;
+                    order.ItemIds = message.AddItems.Select( s => new OrderItem() {ItemId = s.ItemId, Qty = s.Qty} ).ToList();
 
                     Couch.Save( order.Id, MementoProvider.GetMemento( order ) );
 
@@ -34,7 +35,11 @@ namespace shortorder.domain.service.handlers.v1
                     {
                         x.ActorId = message.Id.ToString();
                         x.CustomerName = message.CustomerName;
-                        x.ItemIds = message.ItemIds;
+                        x.Items = message.AddItems.Select( s => new OrderItemCreated()
+                                                                    {
+                                                                        ItemId = s.ItemId,
+                                                                        Qty = s.Qty
+                                                                    } ).ToList();
                     } );
 
                     return x => x.Acknowledge();
