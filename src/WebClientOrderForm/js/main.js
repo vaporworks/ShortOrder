@@ -87,15 +87,13 @@ var Repository = function() {
                                     CustomerName: order.customerName(),
                                     ItemIds: items
                                  };
-        var data = {
-                     request: JSON.stringify(createOrderCommand)
-                   };
+        var data = JSON.stringify(createOrderCommand);
         amplify.request("submitOrder", data, function() { window.viewModel.updateOrderStatus(order.orderNumber(), "Order Received"); });
     };
 
     this.getOrderStatus = function(orderNumbers) {
         var ords = { OrderNumbers: orderNumbers };
-        var data = { request: JSON.stringify(ords) };
+        var data = JSON.stringify(ords);
         amplify.request("getOrderStatus", data, function(data) {
             var x = 0;
             for(x; x < data.length; x ++) {
