@@ -1,0 +1,9 @@
+knockoutDebugCallback([
+    'lib/json2.js',
+    'lib/jquery-1.5.2.js',
+    'lib/jquery.tmpl.js',
+    'lib/amplify.core.js',
+    'lib/amplify.request.js',
+    'lib/knockout-latest.debug.js',
+    'lib/koExternalTemplateEngine.js'
+]);
