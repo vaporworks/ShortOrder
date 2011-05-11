@@ -15,7 +15,7 @@ namespace shortorder.host
         {
             Assimilate
                 .Initialize()
-                .Daemon( x => x.Name( "shortorder.host" ).AsDynamicHost( b => b.HostApplicationsFrom( @"..\..\bin\services\" ) ) )
+                .Daemon( x => x.Name( "shortorder.host" ).AsDynamicHost( b => b.HostApplicationsFrom( @"..\..\..\..\services\" ) ) )
                 .AddConsoleLogger<HostService>( x => x.Debug().MessageLayout( m => m.Message().Newline() ) )
                 .RunDaemon();
         }

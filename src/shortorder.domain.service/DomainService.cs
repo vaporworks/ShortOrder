@@ -18,7 +18,7 @@ namespace shortorder.domain.service
             Bus.AddRabbitQueue( x => x.QueueName( "shortorder.events" ).ExchangeName( "shortorder.events" ).NoAck().Durable() );
         }
 
-        public void Stop()
+        public void Stop()  
         {
             
         }

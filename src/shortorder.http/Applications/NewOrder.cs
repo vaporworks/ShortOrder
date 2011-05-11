@@ -15,7 +15,7 @@ namespace shortorder.http
 
         public override bool OnBytes( ArraySegment<byte> bytes, Action readNext )
         {
-            ResponseBuilder.Append( Encoding.UTF8.GetString( bytes.Array, bytes.Offset, bytes.Count ) );
+            ResponseBuilder.Append( Encoding.UTF8.GetString( bytes.Array, bytes.Offset, bytes.Array.Length - bytes.Offset ) );
             return false;
         }
 

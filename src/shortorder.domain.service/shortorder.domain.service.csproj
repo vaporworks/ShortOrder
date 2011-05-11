@@ -17,7 +17,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
+    <OutputPath>..\..\services\domain\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -90,6 +90,7 @@
     <Compile Include="support\MenuItemFactory.cs" />
     <Compile Include="support\MenuItemKeyAccessor.cs" />
     <Compile Include="support\MenuItemMemento.cs" />
+    <Compile Include="support\OrderItemMemento.cs" />
     <Compile Include="support\OrderKeyAccessor.cs" />
     <Compile Include="support\OrderMemento.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

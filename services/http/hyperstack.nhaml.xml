@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>hyperstack.nhaml</name>
+    </assembly>
+    <members>
+        <member name="M:hyperstack.NHamlViewExtensions.RenderNHaml(hyperstack.Owin.IBuildResponse,System.String)">
+            <summary>
+            Renders the view (if found) as the response to the current request. This uses the default
+            layout template if one exists.
+            </summary>
+            <param name="viewName">The view name (do NOT include the extension)</param>
+        </member>
+        <member name="M:hyperstack.NHamlViewExtensions.RenderNHaml(hyperstack.Owin.IBuildResponse,System.String,System.String)">
+            <summary>
+            Renders the view (if found) as the response to the current request. This uses the specified layout
+            template.
+            </summary>
+            <param name="viewName">The view name (do NOT include the extension)</param>
+            <param name="layoutName">The layout name (do NOT include the extension)</param>
+        </member>
+        <member name="M:hyperstack.NHamlViewExtensions.RenderNHaml``1(hyperstack.Owin.IBuildResponse,``0,System.String)">
+            <summary>
+            Renders the view (if found) for the provided model as the response to the current request. This uses the
+            default layout template if one exists.
+            </summary>
+            <param name="viewName">The view name (do NOT include the extension)</param>
+        </member>
+        <member name="M:hyperstack.NHamlViewExtensions.RenderNHaml``1(hyperstack.Owin.IBuildResponse,``0,System.String,System.String)">
+            <summary>
+            Renders the view (if found) for the provided model as the response to the current request. This uses the specified layout
+            template.
+            </summary>
+            <param name="model">The model to use within the view</param>
+            <param name="viewName">The view name (do NOT include the extension)</param>
+            <param name="layoutName">The layout name (do NOT include the extension)</param>
+        </member>
+    </members>
+</doc>

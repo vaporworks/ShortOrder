@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Symbiote.Messaging</name>
+    </assembly>
+    <members>
+        <member name="M:Symbiote.Messaging.IBus.HasChannelFor(System.String)">
+            <summary>
+            Checks to see if any typed channels have been defined
+            for message type T with the specified name.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Messaging.IBus.Publish``1(System.String,``0)">
+            <summary>
+            Publish a message to the named channel.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Messaging.IBus.Publish``1(System.String,``0,System.Action{Symbiote.Messaging.IEnvelope})">
+            <summary>
+            Publish a message to the named channel defined for
+            the message type after modifying the envelope according
+            to the provided delegate.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Messaging.IBus.Request``2(System.String,``0)">
+            <summary>
+            Publish a message to the named channel with an expected response.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Messaging.IBus.Request``2(System.String,``0,System.Action{Symbiote.Messaging.IEnvelope})">
+            <summary>
+            Publish a message to the named channel defined for
+            the message type after modifying the envelope according
+            to the provided delegate.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Messaging.IBus.StartSubscription(System.String)">
+            <summary>
+            Starts listening for messages associated with the named subscription.
+            </summary>
+        </member>
+        <member name="M:Symbiote.Messaging.IBus.StopSubscription(System.String)">
+            <summary>
+            Stops listening for messages associated with the named subscription.
+            </summary>
+        </member>
+    </members>
+</doc>

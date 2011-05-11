@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Relax</name>
+    </assembly>
+    <members>
+        <member name="T:Relax.Impl.CouchProxy">
+            <summary>
+            This class provides generic abstractions that Symbiote's
+            Actor system requires in order to handle caching and
+            persistence concerns. Not recommended for use outside
+            of this use case unless you truly understand the
+            underlying calls this makes to the IRedisClient API
+            </summary>
+        </member>
+    </members>
+</doc>
