@@ -1,13 +1,17 @@
 var Repository = function() {
-    /*amplify.request.define( "submitOrder", "ajax", {
-        url: "/order/{orderNumber}",
+    amplify.request.define( "submitOrder", "ajax", {
+        url: "/order",
         dataType: "json",
         type: "PUT",
         contentType : "application/json"
-    });*/
+    });
+
+    /*
+    // Test request for submit order...
     amplify.request.define( "submitOrder", function( settings ) {
         settings.success("Order Received");
     });
+    */
 
     /*amplify.request.define("getMenuItems", "ajax", {
         url: "/menu",
@@ -42,16 +46,19 @@ var Repository = function() {
         settings.success(testData);
     });
 
-    /*amplify.request.define("getNewOrderId", "ajax", {
+    amplify.request.define("getNewOrderId", "ajax", {
         url: "/uniqueid",
         dataType: "json",
         type: "GET",
         contentType : "application/json"
-    });*/
+    });
 
+    /*
+    // Test request for unique id
     amplify.request.define("getNewOrderId", function( settings ) {
         settings.success(Math.floor(Math.random() * 1000) * Math.floor(Math.random() * 1000));
     });
+    */
 
     this.getUniqueId = function(observable) {
         amplify.request("getNewOrderId", function(data) { observable(data); });
@@ -62,12 +69,27 @@ var Repository = function() {
     };
 
     this.submitOrder = function(order) {
+        var getEvaluatedMenuItems = function(menuItems) {
+            var i = 0, newArray = [];
+            for(i;i<menuItems.length;i++)
+            {
+                newArray.push({
+                    Description: menuItems[i].description,
+                    ItemId: menuItems[i].itemId,
+                    Qty: menuItems[i].qty()
+                });
+            }
+            return newArray;
+        };
+        var items = getEvaluatedMenuItems(order.menuItems());
         var createOrderCommand = {
                                     Id: order.orderNumber(),
                                     CustomerName: order.customerName(),
-                                    ItemIds: order.menuItems()
+                                    ItemIds: items
                                  };
-        var data = { request: JSON.stringify(createOrderCommand) };
+        var data = {
+                     request: JSON.stringify(createOrderCommand)
+                   };
         amplify.request("submitOrder", data, function() { window.viewModel.updateOrderStatus(order.orderNumber(), "Order Received"); });
     };
 
