@@ -20,7 +20,8 @@ namespace shortorder.domain.service.support
         {
             var id = KeyAccessor.GetId( actor.Retrieve() );
             var old = Couch.Get<IMemento<T>>( id ) as CouchDocument;
-            ( actor as CouchDocument ).DocumentRevision = old.DocumentRevision;
+            if( old != null )
+                ( actor as CouchDocument ).DocumentRevision = old.DocumentRevision;
             Couch.Persist( id, actor );
         }
 
