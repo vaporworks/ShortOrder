@@ -35,6 +35,7 @@ namespace shortorder.wpf.cookui.Handlers
                         Qty = s.Qty
                     }).ToList()
                 };
+
                 _eventAggregator.GetEvent<InComingOrderEvent>().Publish(msg);
 
                 return m => m.Acknowledge();
