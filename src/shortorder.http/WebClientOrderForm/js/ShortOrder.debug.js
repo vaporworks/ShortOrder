@@ -95,10 +95,13 @@
                 }
                 return newArray;
             };
-            var items = getEvaluatedMenuItems(order['menuItems']());
+            // forcing evaluation of observables before creating command
+            var items = getEvaluatedMenuItems(order['menuItems']()),
+                ordNum = order['orderNumber'](),
+                custName = order['customerName']();
             var createOrderCommand = {
-                                        "Id": order['orderNumber'](),
-                                        "CustomerName": order['customerName'](),
+                                        "Id": ordNum,
+                                        "CustomerName": custName,
                                         "Items": items
                                      };
             var data = global['JSON']['stringify'](createOrderCommand);
@@ -112,7 +115,7 @@
                 global['amplify']['request']("getOrderStatus", reqData, function(data) {
                     if(data !== undefined) {
                         var statusMsg = "You order rank is: " + data.Rank;
-                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], data['Status']);
+                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], statusMsg);
                     }
                 });
             }
@@ -273,7 +276,7 @@
                     ordNums.push(global['so']['viewModel']['orders']()[i]['orderNumber']());
                 }
                 global['so']['repository']['getOrderStatus'](ordNums);
-            }, 5000);
+            }, 10000);
         };
 
         this['startPolling']();

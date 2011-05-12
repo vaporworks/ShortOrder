@@ -8,7 +8,10 @@ namespace shortorder.domain.service
     {
         public Order CreateInstance<TKey>( TKey id )
         {
-            return new Order() { Id = Guid.Parse( id.ToString() ) };
+            return new Order()
+                       {
+                           Id = Guid.Parse( id.ToString() )
+                       };
         }
     }
 }

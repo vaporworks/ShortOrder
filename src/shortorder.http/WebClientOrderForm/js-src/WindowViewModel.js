@@ -73,7 +73,7 @@
                     ordNums.push(global['so']['viewModel']['orders']()[i]['orderNumber']());
                 }
                 global['so']['repository']['getOrderStatus'](ordNums);
-            }, 5000);
+            }, 10000);
         };
 
         this['startPolling']();

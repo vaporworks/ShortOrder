@@ -17,5 +17,6 @@ namespace shortorder.messages
         public Guid OrderId { get; set; }
         public int ItemId { get; set; }
         public int Qty { get; set; }
+        public string Description { get; set; }
     }
 }

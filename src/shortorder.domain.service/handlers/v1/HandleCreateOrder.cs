@@ -34,11 +34,13 @@ namespace shortorder.domain.service.handlers.v1
                     context.PublishOnCommit<OrderCreated>( x => 
                     {
                         x.ActorId = message.Id.ToString();
+                        x.Id = message.Id;
                         x.CustomerName = message.CustomerName;
                         x.Items = message.Items.Select( s => new OrderItemCreated()
                                                                     {
                                                                         ItemId = s.ItemId,
-                                                                        Qty = s.Qty
+                                                                        Qty = s.Qty,
+                                                                        Description = s.Description
                                                                     } ).ToList();
                     } );
 
