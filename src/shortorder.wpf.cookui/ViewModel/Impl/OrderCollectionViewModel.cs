@@ -82,8 +82,8 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                     _node.Publish( new OrderRanked()
                                        {
                                            Id = order.Id,
-                                           Rank = idx
-                                       } );
+                                           Rank = idx,
+                                       },a => a.CorrelationId = order.Id.ToString() );
                 }
             }
             OnPropertyChanged( "OrderCount" );
@@ -99,7 +99,7 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                     _node.Publish( new OrderMade()
                                        {
                                            Id = order.Id
-                                       } );
+                                       }, a => a.CorrelationId = order.Id.ToString());
                 }
             }
             OnPropertyChanged("OrderCount");
