@@ -31,9 +31,9 @@
         });
 
         /*['amplify']['request']['define']("getOrderStatus", "ajax", {
-            url: "/orderStatus",
+            url: "/orderStatus/{orderNumber}",
             dataType: "json",
-            type: "POST",
+            type: "GET",
             contentType : "application/json"
         });*/
         global['amplify']['request']['define']("getOrderStatus", function( settings ) {
