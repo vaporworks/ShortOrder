@@ -1,9 +1,8 @@
 ﻿using System;
-using Symbiote.Core.UnitOfWork;
 
 namespace shortorder.messages
 {
-    public class OrderRanked : EventBase
+    public class OrderRanked
     {
         public Guid Id { get; set; }
         public int Rank { get; set; }
