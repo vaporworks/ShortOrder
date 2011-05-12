@@ -10,6 +10,7 @@ using shortorder.wpf.cookui.Events;
 using shortorder.wpf.cookui.Factory;
 using shortorder.wpf.cookui.WpfSupport.Impl;
 using Symbiote.Messaging;
+using Symbiote.Messaging.Impl.Mesh;
 using Symbiote.Rabbit;
 
 namespace shortorder.wpf.cookui.ViewModel.Impl
@@ -19,6 +20,7 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
         private readonly IEventAggregator _eventAggregator;
         private readonly IOrderViewModelFactory _orderViewModelFactory;
         private readonly IBus _bus;
+        private readonly INode _node;
 
         public ObservableCollection<IOrderViewModel> Orders { get; set; }
 
@@ -27,14 +29,61 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
             get { return Orders.Count; }
         }
 
-        public OrderCollectionViewModel(IEventAggregator eventAggregator, IOrderViewModelFactory orderViewModelFactory, IBus bus)
+        public OrderCollectionViewModel(IEventAggregator eventAggregator, IOrderViewModelFactory orderViewModelFactory, IBus bus, INode node)
         {
             _eventAggregator = eventAggregator;
             _orderViewModelFactory = orderViewModelFactory;
             Orders = new ObservableCollection<IOrderViewModel>();
             _bus = bus;
+            _node = node;
             WireUpOrderEvents();
             WireUpMessageBus();
+            Orders.Add(new OrderViewModel()
+                           {
+                               CustomerName = "Jim",
+                               Id = Guid.NewGuid(),
+                               Items = new List<IOrderItemViewModel>()
+                                           {
+                                               new OrderItemViewModel()
+                                                   {
+                                                       ItemId = 1,
+                                                       Description = "Burgerz",
+                                                       Qty = 2
+                                                   },
+                                               new OrderItemViewModel()
+                                                   {
+                                                       ItemId = 21,
+                                                       Description = "Drinx",
+                                                       Qty = 2
+                                                   }
+                                           }
+                           });
+            Orders.Add( new OrderViewModel()
+                            {
+                                CustomerName = "Alex",
+                                Id = Guid.NewGuid(),
+                                Items = new List<IOrderItemViewModel>()
+                                            {
+                                                new OrderItemViewModel()
+                                                    {
+                                                        ItemId = 1,
+                                                        Description = "Burgerz",
+                                                        Qty = 2
+                                                    },
+                                                new OrderItemViewModel()
+                                                    {
+                                                        ItemId = 21,
+                                                        Description = "Drinx",
+                                                        Qty = 2
+                                                    },
+                                                new OrderItemViewModel()
+                                                    {
+                                                        ItemId = 13,
+                                                        Description = "Shaix",
+                                                        Qty = 45
+                                                    }
+                                            }
+                            } );
         }
 
         private void WireUpMessageBus()
@@ -91,12 +140,10 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                 var order = item as IOrderViewModel;
                 if(order != null)
                 {
-                    _eventAggregator.GetEvent<OrderMadeEvent>().Publish( new OrderMadeDefinition()
-                                                                             {
-                                                                                 CustomerName = order.CustomerName,
-                                                                                 Id = order.Id,
-                                                                                 TimeMade = DateTime.Now
-                                                                             });
+                    _node.Publish( new OrderMade()
+                                       {
+                                           Id = order.Id
+                                       } );
                 }
             }
             OnPropertyChanged("OrderCount");

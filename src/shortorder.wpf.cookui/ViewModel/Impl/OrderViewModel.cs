@@ -7,8 +7,6 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
 {
     public class OrderViewModel : ClosableViewModelBase, IOrderViewModel
     {
-        private ICommand _setAsActiveCommand;
-        private bool _isActive;
         private Guid _id;
         private int _rank;
         private string _customerName;
@@ -68,27 +66,6 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                 _timeReceived = value;
                 OnPropertyChanged( "TimeReceived" );
             }
-        }
-
-        public bool IsActive
-        {
-            get { return _isActive; }
-        }
-
-        public ICommand SetAsActiveCommand
-        {
-            get { return _setAsActiveCommand ?? (_setAsActiveCommand = new RelayCommand(param => SetAsActive(), pred => CanSetAsActive())); }
-        }
-
-        private void SetAsActive()
-        {
-            _isActive = true;
-            OnPropertyChanged( "IsActive" );
-        }
-        
-        private bool CanSetAsActive()
-        {
-            return !_isActive;
         }
     }
 }

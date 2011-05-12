@@ -91,7 +91,9 @@
     <Compile Include="UpdateMenuItem.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="WebClientOrderForm\.idea\.name" />
     <None Include="WebClientOrderForm\.idea\WebClientOrderForm.iml" />
     <None Include="WebClientOrderForm\build\build-third-party.bat" />
