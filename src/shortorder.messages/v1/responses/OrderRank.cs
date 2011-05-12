@@ -7,5 +7,6 @@ namespace shortorder.messages
         public Guid Id { get; set; }
         public string CustomerName { get; set; }
         public int Rank { get; set; }
+        public bool Complete { get; set; }
     }
 }

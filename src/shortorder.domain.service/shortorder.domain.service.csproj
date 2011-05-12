@@ -85,6 +85,7 @@
     <Compile Include="handlers\v1\WhenMenuItemAdded.cs" />
     <Compile Include="handlers\v1\WhenMenuItemChanged.cs" />
     <Compile Include="handlers\v1\WhenOrderCreated.cs" />
+    <Compile Include="handlers\v1\WhenOrderMade.cs" />
     <Compile Include="support\CouchActorStore.cs" />
     <Compile Include="support\OrderFactory.cs" />
     <Compile Include="Program.cs" />
