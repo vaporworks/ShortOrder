@@ -1,31 +1,32 @@
-﻿using Relax;
+﻿using System;
+using Relax;
 using Relax.Impl;
+using shortoder.domain;
 using Symbiote.Core;
 using Symbiote.Core.Actor;
 
 namespace shortorder.domain.service.support
 {
-    public class CouchActorStore<T> : IActorStore<T>
-        where T : class
+    public class OrderStore : IActorStore<Order>
     {
         public CouchProxy Couch { get; set; }
         public IKeyAccessor KeyAccessor { get; set; }
 
-        public IMemento<T> Get<TKey>( TKey id )
+        IMemento<Order> IActorStore<Order>.Get<TKey>( TKey id )
         {
-            return Couch.Get<IMemento<T>>( id.ToString() );
+            return Couch.Get<OrderMemento>( id.ToString() );
         }
 
-        public void Store( IMemento<T> actor )
+        public void Store( IMemento<Order> actor )
         {
             var id = KeyAccessor.GetId( actor.Retrieve() );
-            var old = Couch.Get<IMemento<T>>( id ) as CouchDocument;
+            var old = Couch.Get<OrderMemento>( id ) as CouchDocument;
             if( old != null )
                 ( actor as CouchDocument ).DocumentRevision = old.DocumentRevision;
             Couch.Persist( id, actor );
         }
 
-        public CouchActorStore( CouchProxy couch, IKeyAccessor keyAccessor )
+        public OrderStore( CouchProxy couch, IKeyAccessor keyAccessor )
         {
             Couch = couch;
             KeyAccessor = keyAccessor;

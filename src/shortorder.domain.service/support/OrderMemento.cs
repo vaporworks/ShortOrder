@@ -19,6 +19,7 @@ namespace shortorder.domain.service
 
         public void Capture( Order instance )
         {
+            DocumentId = instance.Id.ToString();
             Id = instance.Id;
             Rank = instance.Rank;
             CustomerName = instance.CustomerName;
