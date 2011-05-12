@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Windows.Threading;
 using Microsoft.Practices.Prism.Events;
 using shortorder.messages;
 using shortorder.wpf.cookui.Events;
@@ -22,6 +23,24 @@ namespace shortorder.wpf.cookui.Handlers
         {
             try
             {
+                HandleIncomingOrder( message );
+                
+                return m => m.Acknowledge();
+            }
+            catch ( Exception ex)
+            {
+                return m => m.Reject( ex.ToString() );
+            }
+        }
+
+        private void HandleIncomingOrder(OrderCreated message)
+        {
+            if (!Dispatcher.CurrentDispatcher.CheckAccess())
+            {
+                Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => HandleIncomingOrder(message)));
+            }
+            else
+            {
                 var msg = new InComingOrderDefinition()
                 {
                     CustomerName = message.CustomerName,
@@ -36,12 +55,6 @@ namespace shortorder.wpf.cookui.Handlers
                     }).ToList()
                 };
                 _eventAggregator.GetEvent<InComingOrderEvent>().Publish(msg);
-
-                return m => m.Acknowledge();
-            }
-            catch ( Exception ex)
-            {
-                return m => m.Reject( ex.ToString() );
             }
         }
     }
