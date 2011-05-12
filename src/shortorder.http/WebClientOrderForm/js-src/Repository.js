@@ -104,8 +104,8 @@
                 var reqData = {orderNumber: orderNumbers[i]};
                 global['amplify']['request']("getOrderStatus", reqData, function(data) {
                     if(data !== undefined) {
-                        var statusMsg = "You order rank is: " + data.Rank;
-                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], statusMsg);
+                        data.statusMsg = "You order rank is: " + data.Rank;
+                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], data);
                     }
                 });
             }

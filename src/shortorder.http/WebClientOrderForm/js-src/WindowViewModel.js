@@ -55,11 +55,16 @@
             });
         };
 
-        this['updateOrderStatus'] = function(orderNumber, status) {
+        this['updateOrderStatus'] = function(orderNumber, data) {
             var i = 0;
             for(i; i < this['orders']().length; i++) {
                 if(this['orders']()[i]['orderNumber']() === orderNumber) {
-                    this['orders']()[i]['status'](status);
+                    if(!data.Complete) {
+                        this['orders']()[i]['status'](data.statusMsg);
+                    }
+                    else {
+                        this['orders'][i].remove(this['orders']()[i]);
+                    }
                     break;
                 }
             }

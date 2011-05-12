@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 using hyperstack;
 using hyperstack.Owin.Http;
@@ -22,7 +23,7 @@ namespace shortorder.http
                 .RocketSockets( x => x.UseDefaultEndpoint() )
                 .HyperStack( x => x
                                         .ConfigureHost( c => c
-                                            .BasePath( @"C:\active-git\ShortOrder\src\shortorder.http\WebClientOrderForm" )
+                                            .BasePath( ConfigurationManager.AppSettings["BasePath"] )
                                             .AddViewSearchFolder( "template" )
                                         )
                                         .RegisterApplications( routes => routes
@@ -67,7 +68,7 @@ namespace shortorder.http
                                         )
                             )
                 .AddConsoleLogger<HostService>( x => x.Debug().MessageLayout( m => m.Message().Newline() ) )
-                .Rabbit( x => x.AddBroker( b => b.Defaults() ).EnrollAsMeshNode( true ) )
+                .Rabbit(x => x.AddBroker(b => b.Defaults().Address(ConfigurationManager.AppSettings["RabbitHost"])).EnrollAsMeshNode(true))
                 .Daemon( x => x.Name( "shortstack.http" ) )
                 .Dependencies( x => x.For<FileServer>().Use<FileServer>().AsSingleton() )
                 .RunDaemon();

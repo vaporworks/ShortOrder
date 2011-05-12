@@ -105,7 +105,7 @@
                                         "Items": items
                                      };
             var data = global['JSON']['stringify'](createOrderCommand);
-            global['amplify']['request']("submitOrder", data, function() { global['so']['viewModel']['updateOrderStatus'](order['orderNumber'](), "Order Received"); });
+            global['amplify']['request']("submitOrder", data, function() { global['so']['viewModel']['updateOrderStatus'](order['orderNumber'](), "Order Transmitted"); });
         };
 
         this['getOrderStatus'] = function(orderNumbers) {
@@ -114,8 +114,8 @@
                 var reqData = {orderNumber: orderNumbers[i]};
                 global['amplify']['request']("getOrderStatus", reqData, function(data) {
                     if(data !== undefined) {
-                        var statusMsg = "You order rank is: " + data.Rank;
-                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], statusMsg);
+                        data.statusMsg = "You order rank is: " + data.Rank;
+                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], data);
                     }
                 });
             }
@@ -258,11 +258,16 @@
             });
         };
 
-        this['updateOrderStatus'] = function(orderNumber, status) {
+        this['updateOrderStatus'] = function(orderNumber, data) {
             var i = 0;
             for(i; i < this['orders']().length; i++) {
                 if(this['orders']()[i]['orderNumber']() === orderNumber) {
-                    this['orders']()[i]['status'](status);
+                    if(!data.Complete) {
+                        this['orders']()[i]['status'](data.statusMsg);
+                    }
+                    else {
+                        this['orders'][i].remove(this['orders']()[i]);
+                    }
                     break;
                 }
             }

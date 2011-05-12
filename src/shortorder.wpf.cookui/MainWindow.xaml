@@ -13,7 +13,7 @@
                     <DockPanel>
                         <DockPanel DockPanel.Dock="Top" Width="900" LastChildFill="True">
                             <Label Content="Order Number: " DockPanel.Dock="Left" />
-                            <Label Content="{Binding OrderNumber}" DockPanel.Dock="Left" />
+                            <Label Content="{Binding Id}" DockPanel.Dock="Left" />
                             <Label Content="Customer Name: " DockPanel.Dock="Left" />
                             <Label Content="{Binding CustomerName}" DockPanel.Dock="Left" />
                             <Button Command="{Binding CloseCommand}" Content="It's Done!" DockPanel.Dock="Right" Width="75" />

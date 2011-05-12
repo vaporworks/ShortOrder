@@ -14,6 +14,7 @@ namespace shortorder.domain.service
         public Guid Id { get; set; }
         public int Rank { get; set; }
         public string CustomerName { get; set; }
+        public bool Complete { get; set; }
         public List<OrderItemMemento> OrderItemMementos { get; set; }
 
         public void Capture( Order instance )
@@ -21,6 +22,7 @@ namespace shortorder.domain.service
             Id = instance.Id;
             Rank = instance.Rank;
             CustomerName = instance.CustomerName;
+            Complete = instance.Complete;
             OrderItemMementos.Clear();
             foreach(var item in instance.ItemIds)
             {
@@ -35,6 +37,7 @@ namespace shortorder.domain.service
             instance.Id = Id;
             instance.Rank = Rank;
             instance.CustomerName = CustomerName;
+            instance.Complete = Complete;
             instance.ItemIds = GetOrderItems();
         }
 
@@ -45,6 +48,7 @@ namespace shortorder.domain.service
                            Id = Id,
                            CustomerName = CustomerName,
                            Rank = Rank,
+                           Complete = Complete,
                            ItemIds = GetOrderItems()
                        };
         }
