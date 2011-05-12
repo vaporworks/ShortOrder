@@ -38,7 +38,8 @@ namespace shortorder.domain.service.handlers.v1
                         x.Items = message.Items.Select( s => new OrderItemCreated()
                                                                     {
                                                                         ItemId = s.ItemId,
-                                                                        Qty = s.Qty
+                                                                        Qty = s.Qty,
+                                                                        Description = s.Description
                                                                     } ).ToList();
                     } );
 

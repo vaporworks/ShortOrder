@@ -24,6 +24,8 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
 
         public ObservableCollection<IOrderViewModel> Orders { get; set; }
 
+        public Dispatcher Dispatcher { get; set; }
+
         public int OrderCount
         {
             get { return Orders.Count; }
@@ -38,52 +40,6 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
             _node = node;
             WireUpOrderEvents();
             WireUpMessageBus();
-            Orders.Add(new OrderViewModel()
-                           {
-                               CustomerName = "Jim",
-                               Id = Guid.NewGuid(),
-                               Items = new List<IOrderItemViewModel>()
-                                           {
-                                               new OrderItemViewModel()
-                                                   {
-                                                       ItemId = 1,
-                                                       Description = "Burgerz",
-                                                       Qty = 2
-                                                   },
-                                               new OrderItemViewModel()
-                                                   {
-                                                       ItemId = 21,
-                                                       Description = "Drinx",
-                                                       Qty = 2
-                                                   }
-                                           }
-                           });
-            Orders.Add( new OrderViewModel()
-                            {
-                                CustomerName = "Alex",
-                                Id = Guid.NewGuid(),
-                                Items = new List<IOrderItemViewModel>()
-                                            {
-                                                new OrderItemViewModel()
-                                                    {
-                                                        ItemId = 1,
-                                                        Description = "Burgerz",
-                                                        Qty = 2
-                                                    },
-                                                new OrderItemViewModel()
-                                                    {
-                                                        ItemId = 21,
-                                                        Description = "Drinx",
-                                                        Qty = 2
-                                                    },
-                                                new OrderItemViewModel()
-                                                    {
-                                                        ItemId = 13,
-                                                        Description = "Shaix",
-                                                        Qty = 45
-                                                    }
-                                            }
-                            } );
         }
 
         private void WireUpMessageBus()
@@ -123,11 +79,11 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                 {
                     order.RequestClose += HandleOrderRequestClose;
                     var idx = Orders.IndexOf(order);
-                    _bus.Publish( "shortorder.events", new OrderRanked()
-                                                           {
-                                                               Id = order.Id,
-                                                               Rank = idx
-                                                           } );
+                    _node.Publish( new OrderRanked()
+                                       {
+                                           Id = order.Id,
+                                           Rank = idx
+                                       } );
                 }
             }
             OnPropertyChanged( "OrderCount" );
@@ -160,9 +116,9 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
 
         private void HandleIncomingOrder(InComingOrderDefinition orderDefinition)
         {
-            if(!Dispatcher.CurrentDispatcher.CheckAccess())
+            if(!this.Dispatcher.CheckAccess())
             {
-                Dispatcher.CurrentDispatcher.BeginInvoke( DispatcherPriority.Normal, new Action(() => HandleIncomingOrder( orderDefinition )));
+                this.Dispatcher.BeginInvoke( DispatcherPriority.Normal, new Action(() => HandleIncomingOrder( orderDefinition )));
             }
             else
             {

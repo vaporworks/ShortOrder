@@ -43,7 +43,7 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
         {
             get
             {
-                var msg = string.Format( "{0} {1}{2}", Qty, Description, Qty > 1 ? "s" : "" );
+                var msg = string.Format( "{0}X {1}{2}", Qty, Description, (Qty > 1) ? "s" : "" );
                 return msg;
             }
         }

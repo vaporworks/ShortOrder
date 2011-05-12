@@ -40,6 +40,7 @@ namespace shortorder.wpf.cookui
             var viewModel = Assimilate.GetInstanceOf<IOrderCollectionViewModel>();
             mainWindow.DataContext = viewModel;
             viewModel.RequestClose += (sender,args) => mainWindow.Close();
+            viewModel.Dispatcher = mainWindow.Dispatcher;
             mainWindow.Show();
         }
     }
