@@ -17,3 +17,5 @@ desktop.ini
 .eprj
 .idea
 *.orig
+services/domain
+services/http
