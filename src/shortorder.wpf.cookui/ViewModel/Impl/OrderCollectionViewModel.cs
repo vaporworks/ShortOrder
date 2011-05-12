@@ -160,19 +160,17 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
 
         private void HandleIncomingOrder(InComingOrderDefinition orderDefinition)
         {
-            if(!Dispatcher.CurrentDispatcher.CheckAccess())
-            {
-                Dispatcher.CurrentDispatcher.BeginInvoke( DispatcherPriority.Normal, new Action(() => HandleIncomingOrder( orderDefinition )));
-            }
-            else
-            {
-                var order = _orderViewModelFactory.GetOrderViewModelFromValues(( orderDefinition.Id),
+            var order = _orderViewModelFactory.GetOrderViewModelFromValues(( orderDefinition.Id),
                                                                           orderDefinition.CustomerName,
                                                                           orderDefinition.TimeReceived,
                                                                           orderDefinition.Rank );
-                order.Items = orderDefinition.Items.Select(s => _orderViewModelFactory.GetOrderItemViewModelFromValue(s.Description, s.ItemId, s.Qty)).ToList();
-                Orders.Add( order );
-            }
+            order.Items = orderDefinition.Items.Select(s => _orderViewModelFactory.GetOrderItemViewModelFromValue(s.Description, s.ItemId, s.Qty)).ToList();
+            Orders.Add( order );
+
+            //Execute.OnUIThread( () =>
+            //{
+                
+            //} );
         }
     }
 }

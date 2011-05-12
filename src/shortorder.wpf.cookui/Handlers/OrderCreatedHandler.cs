@@ -35,28 +35,24 @@ namespace shortorder.wpf.cookui.Handlers
 
         private void HandleIncomingOrder(OrderCreated message)
         {
-            if (!Dispatcher.CurrentDispatcher.CheckAccess())
-            {
-                Dispatcher.CurrentDispatcher.BeginInvoke(DispatcherPriority.Normal, new Action(() => HandleIncomingOrder(message)));
-            }
-            else
-            {
-                var msg = new InComingOrderDefinition()
+            Execute.OnUIThread( () =>
                 {
-                    CustomerName = message.CustomerName,
-                    Id = message.Id,
-                    Rank = message.Rank,
-                    TimeReceived = DateTime.Now,
-                    Items = message.Items.Select(s => new InComingOrderItemDefinition()
+                    var msg = new InComingOrderDefinition()
                     {
-                        Description = s.Description,
-                        ItemId = s.ItemId,
-                        Qty = s.Qty
-                    }).ToList()
-                };
+                        CustomerName = message.CustomerName,
+                        Id = message.Id,
+                        Rank = message.Rank,
+                        TimeReceived = DateTime.Now,
+                        Items = message.Items.Select(s => new InComingOrderItemDefinition()
+                        {
+                            Description = s.Description,
+                            ItemId = s.ItemId,
+                            Qty = s.Qty
+                        }).ToList()
+                    };
 
-                _eventAggregator.GetEvent<InComingOrderEvent>().Publish(msg);
-            }
+                    _eventAggregator.GetEvent<InComingOrderEvent>().Publish(msg);
+                });
         }
     }
 }
