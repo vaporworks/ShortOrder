@@ -30,12 +30,13 @@
             ]);
         });
 
-        /*['amplify']['request']['define']("getOrderStatus", "ajax", {
+        ['amplify']['request']['define']("getOrderStatus", "ajax", {
             url: "/orderStatus/{orderNumber}",
             dataType: "json",
             type: "GET",
             contentType : "application/json"
-        });*/
+        });
+        /*
         global['amplify']['request']['define']("getOrderStatus", function( settings ) {
             var testData = [];
             var i = 0;
@@ -47,6 +48,7 @@
             }
             settings['success'](testData);
         });
+        */
 
         global['amplify']['request']['define']("getNewOrderId", "ajax", {
             "url": "/uniqueid",

@@ -30,12 +30,13 @@
             ]);
         });
 
-        /*['amplify']['request']['define']("getOrderStatus", "ajax", {
-            url: "/orderStatus",
+        global['amplify']['request']['define']("getOrderStatus", "ajax", {
+            url: "/order/{orderNumber}",
             dataType: "json",
-            type: "POST",
+            type: "GET",
             contentType : "application/json"
-        });*/
+        });
+        /*
         global['amplify']['request']['define']("getOrderStatus", function( settings ) {
             var testData = [];
             var i = 0;
@@ -47,6 +48,7 @@
             }
             settings['success'](testData);
         });
+        */
 
         global['amplify']['request']['define']("getNewOrderId", "ajax", {
             "url": "/uniqueid",
@@ -94,14 +96,16 @@
         };
 
         this['getOrderStatus'] = function(orderNumbers) {
-            var ords = { "OrderNumbers": orderNumbers };
-            var data = global['JSON']['stringify'](ords);
-            global['amplify']['request']("getOrderStatus", data, function(data) {
-                var x = 0;
-                for(x; x < data.length; x ++) {
-                    global['so']['viewModel']['updateOrderStatus'](data[x]['OrderNumber'], data[x]['Status']);
-                }
-            });
+            var i = 0;
+            for(i; i < orderNumbers.length; i++) {
+                var reqData = {orderNumber: orderNumbers[i]};
+                global['amplify']['request']("getOrderStatus", reqData, function(data) {
+                    if(data !== undefined) {
+                        var statusMsg = "You order rank is: " + data.Rank;
+                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], data['Status']);
+                    }
+                });
+            }
         };
     };
     
