@@ -45,6 +45,7 @@
   <ItemGroup>
     <Compile Include="v1\commands\AddMenuItem.cs" />
     <Compile Include="v1\commands\CreateOrder.cs" />
+    <Compile Include="v1\events\OrderRanked.cs" />
     <Compile Include="v1\responses\ItemInfo.cs" />
     <Compile Include="v1\commands\MakeOrder.cs" />
     <Compile Include="v1\events\MenuItemAdded.cs" />

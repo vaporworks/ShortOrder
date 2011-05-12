@@ -8,14 +8,4 @@ namespace shortorder.wpf.cookui.Events
     {
         
     }
-
-    public class OrderRankedEvent : CompositePresentationEvent<OrderRankedDefinition>
-    {
-        
-    }
-
-    public class OrderRankedDefinition
-    {
-        //public Guid 
-    }
 }
