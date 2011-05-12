@@ -28,7 +28,7 @@ namespace shortorder.http
             try
             {
                 var orderId = Guid.Parse( Request.PathSegments.Last() );
-                var rank = Node.Request<RequestOrderStatus, OrderRank>( new RequestOrderStatus() { Id = orderId } );
+                OrderRank rank = Node.Request<RequestOrderStatus, OrderRank>( new RequestOrderStatus() { Id = orderId } );
                 Response
                     .Begin( HttpStatus.Ok, headers => headers.ChunkResponse().ContentType( ContentType.Json ) )
                     .AppendJson( rank )
