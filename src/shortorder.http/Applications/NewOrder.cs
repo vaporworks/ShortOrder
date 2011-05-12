@@ -31,7 +31,7 @@ namespace shortorder.http
             try 
             {
                 var message = ResponseBuilder.ToString().FromJson<CreateOrder>();
-                Node.Publish( message );
+                Node.Publish( message, x => x.CorrelationId = message.Id.ToString() );
                 Response
                     .Begin( HttpStatus.Ok )
                     .End();

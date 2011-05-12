@@ -80,6 +80,8 @@
     <Compile Include="handlers\v1\HandeMenuItemAdd.cs" />
     <Compile Include="handlers\v1\HandleCreateOrder.cs" />
     <Compile Include="handlers\v1\HandleMenuItemUpdate.cs" />
+    <Compile Include="handlers\v1\HandleOrderStatus.cs" />
+    <Compile Include="handlers\v1\HandleOrderStatusChange.cs" />
     <Compile Include="handlers\v1\WhenMenuItemAdded.cs" />
     <Compile Include="handlers\v1\WhenMenuItemChanged.cs" />
     <Compile Include="handlers\v1\WhenOrderCreated.cs" />
