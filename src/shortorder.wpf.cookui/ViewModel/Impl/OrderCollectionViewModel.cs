@@ -5,6 +5,7 @@ using System.Collections.Specialized;
 using System.Linq;
 using System.Windows.Threading;
 using Microsoft.Practices.Prism.Events;
+using shortorder.messages;
 using shortorder.wpf.cookui.Events;
 using shortorder.wpf.cookui.Factory;
 using shortorder.wpf.cookui.WpfSupport.Impl;
@@ -17,7 +18,7 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
     {
         private readonly IEventAggregator _eventAggregator;
         private readonly IOrderViewModelFactory _orderViewModelFactory;
-        private IBus _bus;
+        private readonly IBus _bus;
 
         public ObservableCollection<IOrderViewModel> Orders { get; set; }
 
@@ -72,6 +73,12 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                 if(order != null)
                 {
                     order.RequestClose += HandleOrderRequestClose;
+                    var idx = Orders.IndexOf(order);
+                    _bus.Publish( "shortorder.events", new OrderRanked()
+                                                           {
+                                                               Id = order.Id,
+                                                               Rank = idx
+                                                           } );
                 }
             }
             OnPropertyChanged( "OrderCount" );
@@ -117,6 +124,7 @@ namespace shortorder.wpf.cookui.ViewModel.Impl
                                                                           orderDefinition.TimeReceived,
                                                                           orderDefinition.Rank );
                 order.Items = orderDefinition.Items.Select(s => _orderViewModelFactory.GetOrderItemViewModelFromValue(s.Description, s.ItemId, s.Qty)).ToList();
+                Orders.Add( order );
             }
         }
     }
