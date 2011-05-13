@@ -55,6 +55,8 @@
             }
         }
 
-        this['acquireNewOrderNumber']();
+        if(!this['orderNumber']()) {
+            this['acquireNewOrderNumber']();
+        }
     };
 })(window);

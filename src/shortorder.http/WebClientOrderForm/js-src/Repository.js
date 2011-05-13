@@ -78,8 +78,8 @@
                 for(i;i<menuItems.length;i++)
                 {
                     newArray.push({
-                        "Description": menuItems[i]['description'],
-                        "ItemId": menuItems[i]['itemId'],
+                        "Description": menuItems[i]['description'](),
+                        "ItemId": menuItems[i]['itemId'](),
                         "Qty": menuItems[i]['qty']()
                     });
                 }
@@ -87,8 +87,8 @@
             };
             // forcing evaluation of observables before creating command
             var items = getEvaluatedMenuItems(order['menuItems']()),
-                ordNum = order['orderNumber'](),
-                custName = order['customerName']();
+                custName = order['customerName'](),
+                ordNum = order['orderNumber']();
             var createOrderCommand = {
                                         "Id": ordNum,
                                         "CustomerName": custName,
@@ -103,9 +103,10 @@
             for(i; i < orderNumbers.length; i++) {
                 var reqData = {orderNumber: orderNumbers[i]};
                 global['amplify']['request']("getOrderStatus", reqData, function(data) {
+                    var ordNum = reqData['orderNumber'];
                     if(data !== undefined) {
                         data.statusMsg = "You order rank is: " + data.Rank;
-                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], data);
+                        global['so']['viewModel']['updateOrderStatus'](ordNum, data);
                     }
                 });
             }

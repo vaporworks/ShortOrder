@@ -88,8 +88,8 @@
                 for(i;i<menuItems.length;i++)
                 {
                     newArray.push({
-                        "Description": menuItems[i]['description'],
-                        "ItemId": menuItems[i]['itemId'],
+                        "Description": menuItems[i]['description'](),
+                        "ItemId": menuItems[i]['itemId'](),
                         "Qty": menuItems[i]['qty']()
                     });
                 }
@@ -97,8 +97,8 @@
             };
             // forcing evaluation of observables before creating command
             var items = getEvaluatedMenuItems(order['menuItems']()),
-                ordNum = order['orderNumber'](),
-                custName = order['customerName']();
+                custName = order['customerName'](),
+                ordNum = order['orderNumber']();
             var createOrderCommand = {
                                         "Id": ordNum,
                                         "CustomerName": custName,
@@ -113,9 +113,10 @@
             for(i; i < orderNumbers.length; i++) {
                 var reqData = {orderNumber: orderNumbers[i]};
                 global['amplify']['request']("getOrderStatus", reqData, function(data) {
+                    var ordNum = reqData['orderNumber'];
                     if(data !== undefined) {
                         data.statusMsg = "You order rank is: " + data.Rank;
-                        global['so']['viewModel']['updateOrderStatus'](reqData['orderNumber'], data);
+                        global['so']['viewModel']['updateOrderStatus'](ordNum, data);
                     }
                 });
             }
@@ -198,7 +199,9 @@
             }
         }
 
-        this['acquireNewOrderNumber']();
+        if(!this['orderNumber']()) {
+            this['acquireNewOrderNumber']();
+        }
     };
 })(window);
 
@@ -227,10 +230,33 @@
             }
 
             if(valid)  {
+                var createNewObs = function(menuItm) {
+                    var qty = menuItm.qty();
+                    var mi = new global['so']['MenuItem']({
+                            itemId: new global['ko']['observable'](menuItm.itemId),
+                            description: new global['ko']['observable'](menuItm.description)
+                        });
+                    mi.qty = new global['ko']['observable'](qty);
+                    return mi;
+                }
+
+                var ordNum = this['orderToPlace']['orderNumber'](),
+                    custName = this['orderToPlace']['customerName'](),
+                    itms = this['orderToPlace']['menuItems']();
+
+                var newItems = [];
+
+                var n = 0;
+                for(n; n < itms.length; n++) {
+                    var nmi = createNewObs(itms[n]);
+                    newItems.push(nmi);
+                }
+
+
                 var newOrder = new global['so']['Order']({
-                                            "orderNumber": this['orderToPlace']['orderNumber'](),
-                                            "customerName": this['orderToPlace']['customerName'](),
-                                            "menuItems": this['orderToPlace']['menuItems']()
+                                            "orderNumber": ordNum,
+                                            "customerName": custName,
+                                            "menuItems": newItems
                                          });
                 this['orders'].push(newOrder);
                 global['so']['repository']['submitOrder'](newOrder);
@@ -259,14 +285,15 @@
         };
 
         this['updateOrderStatus'] = function(orderNumber, data) {
-            var i = 0;
+            var i = 0, ordNum = orderNumber;
             for(i; i < this['orders']().length; i++) {
-                if(this['orders']()[i]['orderNumber']() === orderNumber) {
+                if(this['orders']()[i]['orderNumber']() === ordNum) {
+                    var target = this['orders']()[i];
                     if(!data.Complete) {
-                        this['orders']()[i]['status'](data.statusMsg);
+                        target['status'](data.statusMsg);
                     }
                     else {
-                        this['orders'][i].remove(this['orders']()[i]);
+                        this['orders'].remove(function(x) { return x['orderNumber']() === target['orderNumber']() });
                     }
                     break;
                 }

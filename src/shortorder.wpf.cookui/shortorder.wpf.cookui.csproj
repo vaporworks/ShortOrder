@@ -75,7 +75,6 @@
     <Compile Include="Events\InComingOrderDefinition.cs" />
     <Compile Include="Events\InComingOrderEvent.cs" />
     <Compile Include="Events\InComingOrderItemDefinition.cs" />
-    <Compile Include="Execute.cs" />
     <Compile Include="Factory\IOrderViewModelFactory.cs" />
     <Compile Include="Factory\OrderViewModelFactory.cs" />
     <Compile Include="ViewModel\Impl\OrderItemViewModel.cs" />
